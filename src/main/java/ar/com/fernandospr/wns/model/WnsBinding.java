@@ -7,32 +7,37 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
- * From <a href="http://msdn.microsoft.com/en-us/library/windows/apps/br230843.aspx">http://msdn.microsoft.com/en-us/library/windows/apps/br230843.aspx</a>
+ * From
+ * <a href="http://msdn.microsoft.com/en-us/library/windows/apps/br230843.aspx">
+ * http://msdn.microsoft.com/en-us/library/windows/apps/br230843.aspx</a>
  */
 @XmlRootElement(name = "binding")
 public class WnsBinding {
-	
+
 	@XmlAttribute
 	public String template;
-	
+
 	@XmlAttribute
 	public String fallback;
-	
+
 	@XmlAttribute
 	public String lang;
-	
+
 	@XmlAttribute
 	public String baseUri;
-	
+
 	@XmlAttribute
 	public String branding;
-	
+
 	@XmlAttribute
 	public Boolean addImageQuery;
-	
+
+	@XmlAttribute
+	public String contentId;
+
 	@XmlElement(name = "image")
 	public List<WnsImage> images;
-	
+
 	@XmlElement(name = "text")
 	public List<WnsText> texts;
 }
