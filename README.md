@@ -8,17 +8,9 @@ This library will let you implement the Cloud Service of the diagram below:
 
 
 ## Updates
-Version 1.3 released!
-
-**1.3 Changes**
-* Proxy support
-
-**1.2 Changes** 
-* Send raw notifications
-
-**1.1 Changes** 
-* Send a notification to multiple channelUris
-
+* Replaced dependencies from GlassFish and Jersey with RESTEasy.
+* Updated notifications builder examples.
+* Added a custom logging filter.
 
 ## Steps
 * <a href="#first-step---registration">First</a>, you will need to register your Windows application in the store to get a SID (Package security identifier) and Client Secret codes.
@@ -102,21 +94,21 @@ service.pushBadge(channelUri, badge);
 Write the following to send a Tile notification:
 ```
 String channelUri = "yourChannelUri";
-WnsTile tile =  new WnsTileBuilder().bindingTemplateTileWideText03("Hello world").build();
+WnsTile tile = new WnsTileBuilder().newBinding().bindingTemplateTileWideText03("Hello world").addBinding().build();
 service.pushTile(channelUri, tile);
 ```
 
 Write the following to send a Toast notification:
 ```
 String channelUri = "yourChannelUri";
-WnsToast toast =  new WnsToastBuilder().bindingTemplateToastText01("Hello world").build();
+WnsToast toast = new WnsToastBuilder().newBinding().bindingTemplateToastText01("Hello world").addBinding().build();
 service.pushToast(channelUri, toast);
 ```
 
 Write the following to send a Raw notification:
 ```
 String channelUri = "yourChannelUri";
-WnsRaw raw =  new WnsRawBuilder().stream("Hello world".getBytes()).build();
+WnsRaw raw = new WnsRawBuilder().stream("Hello world".getBytes()).build();
 service.pushRaw(channelUri, raw);
 ```
 
