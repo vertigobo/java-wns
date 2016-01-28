@@ -34,7 +34,7 @@ public class WnsToastBuilder extends WnsAbstractBuilder<WnsToastBuilder> {
 	@Override
 	protected List<WnsBinding> getBindings() {
 		if (getVisual().bindings == null) {
-			getVisual().bindings = new ArrayList<>();
+			getVisual().bindings = new ArrayList<WnsBinding>();
 		}
 		return this.toast.visual.bindings;
 	}
@@ -107,7 +107,7 @@ public class WnsToastBuilder extends WnsAbstractBuilder<WnsToastBuilder> {
 
 	public WnsToastBuilder addCommand(String id, String arguments) {
 		if (getCommands().commands == null) {
-			getCommands().commands = new ArrayList<>();
+			getCommands().commands = new ArrayList<WnsCommand>();
 		}
 
 		WnsCommand c = new WnsCommand();

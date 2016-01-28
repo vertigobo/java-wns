@@ -82,7 +82,7 @@ public class WnsClient {
 	public void refreshAccessToken() throws WnsException {
 		WebTarget target = client.target(AUTHENTICATION_URI);
 
-		MultivaluedMap<String, String> formData = new MultivaluedHashMap<>();
+		MultivaluedMap<String, String> formData = new MultivaluedHashMap<String, String>();
 		formData.add("grant_type", GRANT_TYPE_CLIENT_CREDENTIALS);
 		formData.add("client_id", this.sid);
 		formData.add("client_secret", this.clientSecret);
