@@ -32,8 +32,10 @@ public class WnsClient {
 
 	private String sid;
 	private String clientSecret;
+	private WnsProxyProperties proxyProps;
+	private boolean logging;
+
 	private WnsOAuthToken token;
-	private Client client;
 
 	public WnsClient(String sid, String clientSecret, boolean logging) {
 		this(sid, clientSecret, null, logging);
@@ -42,7 +44,8 @@ public class WnsClient {
 	public WnsClient(String sid, String clientSecret, WnsProxyProperties proxyProps, boolean logging) {
 		this.sid = sid;
 		this.clientSecret = clientSecret;
-		this.client = createClient(logging, proxyProps);
+		this.proxyProps = proxyProps;
+		this.logging = logging;
 	}
 
 	private static Client createClient(boolean logging, WnsProxyProperties proxyProps) {
@@ -80,6 +83,7 @@ public class WnsClient {
 	 *             when authentication fails
 	 */
 	public void refreshAccessToken() throws WnsException {
+		Client client = createClient(logging, proxyProps);
 		WebTarget target = client.target(AUTHENTICATION_URI);
 
 		MultivaluedMap<String, String> formData = new MultivaluedHashMap<String, String>();
@@ -111,6 +115,7 @@ public class WnsClient {
 	 */
 	public WnsNotificationResponse push(WnsResourceBuilder resourceBuilder, String channelUri, WnsAbstractNotification notification, int retriesLeft,
 			WnsNotificationRequestOptional optional) throws WnsException {
+		Client client = createClient(logging, proxyProps);
 		WebTarget target = client.target(channelUri);
 		Invocation.Builder webResourceBuilder = resourceBuilder.build(target, notification, getToken().access_token, optional);
 		String type = notification.getType().equals(WnsNotificationType.RAW) ? MediaType.APPLICATION_OCTET_STREAM : MediaType.TEXT_XML;
